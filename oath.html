@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oath Photobooth — Kelli Blake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#2a2c35; --bg-card:#32343e; --white:#f0ede8; --muted:rgba(240,237,232,0.55); --divider:rgba(240,237,232,0.12); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--white); font-family:'Josefin Sans',sans-serif; font-weight:300; line-height:1.7; overflow-x:hidden; min-height:100vh; position:relative; }
+  body::before { content:''; position:fixed; top:0; left:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(160,104,122,0.25) 0%,rgba(160,104,122,0.08) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  body::after { content:''; position:fixed; top:0; right:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(106,154,154,0.2) 0%,rgba(106,154,154,0.06) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  .line-art { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .line-art svg { position:absolute; opacity:0.07; }
+  .line-art .left-lines { left:-40px; top:50%; transform:translateY(-50%); width:280px; }
+  .line-art .right-lines { right:-40px; top:50%; transform:translateY(-50%) scaleX(-1); width:280px; }
+  .content { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:0 40px; }
+  nav { position:relative; z-index:10; display:flex; justify-content:space-between; align-items:center; max-width:740px; margin:0 auto; padding:36px 40px; border-bottom:1px solid var(--divider); }
+  .nav-name { font-family:'Josefin Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--white); text-decoration:none; }
+  .nav-back { font-size:11px; font-weight:400; letter-spacing:3px; text-transform:uppercase; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color 0.3s; }
+  .nav-back:hover { color:var(--white); }
+  .hero { padding:72px 0 56px; text-align:center; border-bottom:1px solid var(--divider); }
+  .hero-eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); font-weight:400; margin-bottom:28px; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(42px,6vw,68px); font-weight:300; line-height:1.1; letter-spacing:-1px; margin-bottom:24px; color:var(--white); }
+  .hero-title em { font-style:italic; font-weight:300; }
+  .hero-subtitle { font-size:14px; font-weight:300; letter-spacing:1px; color:var(--muted); max-width:520px; margin:0 auto 40px; line-height:1.8; }
+  .hero-meta { display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+  .meta-item { display:flex; flex-direction:column; gap:6px; text-align:center; }
+  .meta-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); font-weight:400; }
+  .meta-value { font-size:13px; font-weight:400; letter-spacing:1px; color:var(--white); }
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--divider); }
+  .stat-cell { padding:36px 24px; text-align:center; border-right:1px solid var(--divider); }
+  .stat-cell:last-child { border-right:none; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:300; color:var(--white); line-height:1; margin-bottom:8px; letter-spacing:-1px; }
+  .stat-lbl { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); font-weight:400; line-height:1.5; }
+  .section { padding:64px 0; border-bottom:1px solid var(--divider); }
+  .section-eyebrow { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); font-weight:400; margin-bottom:16px; text-align:center; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,40px); font-weight:300; line-height:1.2; letter-spacing:-0.5px; margin-bottom:28px; color:var(--white); text-align:center; }
+  .section-title em { font-style:italic; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:48px; }
+  .two-col-cell { background:var(--bg-card); padding:40px 36px; }
+  .two-col-cell .cell-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .two-col-cell .cell-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; line-height:1.3; color:var(--white); margin-bottom:16px; }
+  .two-col-cell .cell-title em { font-style:italic; }
+  .two-col-cell p { font-size:13px; font-weight:300; color:var(--muted); line-height:1.85; letter-spacing:0.2px; }
+  .two-col-cell p+p { margin-top:12px; }
+  .work-cards { display:flex; flex-direction:column; gap:2px; margin-top:48px; }
+  .work-card { background:var(--bg-card); padding:40px 36px; display:grid; grid-template-columns:52px 1fr; gap:28px; align-items:start; transition:background 0.3s; }
+  .work-card:hover { background:rgba(255,255,255,0.04); }
+  .work-num { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:rgba(240,237,232,0.2); line-height:1; padding-top:2px; }
+  .work-card-title { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--white); font-weight:600; margin-bottom:12px; }
+  .work-card-body { font-size:13px; font-weight:300; color:var(--muted); line-height:1.85; letter-spacing:0.2px; }
+  .pull-quote { padding:64px 0; text-align:center; border-bottom:1px solid var(--divider); }
+  .pull-quote blockquote { font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3.5vw,32px); font-weight:300; font-style:italic; color:var(--white); line-height:1.6; max-width:560px; margin:0 auto; }
+  .pull-quote blockquote em { font-style:normal; border-bottom:1px solid rgba(240,237,232,0.3); padding-bottom:1px; }
+  .results-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:48px; }
+  .result-cell { background:var(--bg-card); padding:36px 24px; text-align:center; }
+  .result-big { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:var(--white); line-height:1; margin-bottom:10px; letter-spacing:-1px; }
+  .result-desc { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); line-height:1.6; }
+  .btn-pill { display:inline-flex; align-items:center; gap:10px; padding:12px 28px; border:1px solid rgba(240,237,232,0.3); border-radius:100px; font-family:'Josefin Sans',sans-serif; font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--white); text-decoration:none; transition:all 0.3s; margin-top:40px; }
+  .btn-pill:hover { background:rgba(240,237,232,0.08); border-color:rgba(240,237,232,0.5); }
+  footer { padding:48px 0 64px; text-align:center; position:relative; z-index:1; }
+  .footer-name { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--white); margin-bottom:6px; }
+  .footer-role { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:28px; }
+  .footer-tag { font-size:11px; letter-spacing:2px; color:rgba(240,237,232,0.3); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .hero>* { animation:fadeUp 0.7s ease forwards; opacity:0; }
+  .hero>*:nth-child(1){animation-delay:0.1s} .hero>*:nth-child(2){animation-delay:0.22s} .hero>*:nth-child(3){animation-delay:0.34s} .hero>*:nth-child(4){animation-delay:0.46s}
+  @media(max-width:700px){ nav,.content{padding-left:24px;padding-right:24px} .stats-row{grid-template-columns:repeat(2,1fr)} .stat-cell:nth-child(2){border-right:none} .two-col{grid-template-columns:1fr} .results-grid{grid-template-columns:repeat(2,1fr)} .work-card{grid-template-columns:36px 1fr;gap:16px} }
+</style>
+</head>
+<body>
+<div class="line-art">
+  <svg class="left-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+  <svg class="right-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+</div>
+<nav><a href="#" class="nav-name">Kelli Blake</a><a href="https://kelliblake.carrd.co/" class="nav-back">← Back to Portfolio</a></nav>
+<div class="content">
+  <div class="hero">
+    <p class="hero-eyebrow">Case Study · June – September 2017</p>
+    <h1 class="hero-title">Navigating <em>Complexity:</em><br>Oath's Photobooth Tour</h1>
+    <p class="hero-subtitle">Rescuing a global employee experience tour mid-crisis — 15,000+ participants across 50+ cities — through invisible problem-solving and systems built on the fly.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Oath via First Agency</span></div>
+      <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">4 Months</span></div>
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Project Manager &amp; Event Coordinator</span></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-cell"><div class="stat-num">15K+</div><div class="stat-lbl">Participants across tour</div></div>
+    <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-lbl">Cities worldwide</div></div>
+    <div class="stat-cell"><div class="stat-num">2</div><div class="stat-lbl">Regions — US &amp; EMEA</div></div>
+    <div class="stat-cell"><div class="stat-num">0</div><div class="stat-lbl">Client-facing disruptions</div></div>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">The Work</p>
+    <h2 class="section-title">The goal wasn't to manage the crisis —<br><em>it was to make sure no one knew there was one.</em></h2>
+    <div class="two-col">
+      <div class="two-col-cell">
+        <div class="cell-label">The Challenge</div>
+        <h3 class="cell-title">A global tour mid-crisis, <em>mid-merger</em></h3>
+        <p>Oath's global photobooth tour — a large-scale employee experience program spanning 50+ cities across the US and EMEA — hit simultaneous crises: a major agency merger and a critical software failure. The tour couldn't stop. The client couldn't know.</p>
+      </div>
+      <div class="two-col-cell">
+        <div class="cell-label">The Approach</div>
+        <h3 class="cell-title">Absorb the chaos. <em>Protect the experience.</em></h3>
+        <p>Every backend disruption was handled before it could surface to the client or participants. New communications infrastructure was built on the fly via Slack. Software issues were diagnosed and resolved in real time. The participant experience remained seamless from start to finish.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">Work Delivered</p>
+    <h2 class="section-title">Four workstreams.<br><em>Zero client-facing disruptions.</em></h2>
+    <div class="work-cards">
+      <div class="work-card"><div class="work-num">01</div><div><div class="work-card-title">Global Scheduling &amp; Logistics</div><div class="work-card-body">Managed end-to-end scheduling and logistics coordination across 50+ cities in the US and EMEA — maintaining accuracy and continuity throughout the agency merger disruption.</div></div></div>
+      <div class="work-card"><div class="work-num">02</div><div><div class="work-card-title">Software QA &amp; Crisis Management</div><div class="work-card-body">Identified, diagnosed, and resolved critical software failures in real time — preventing any disruption from reaching participants or the client while the backend was stabilized.</div></div></div>
+      <div class="work-card"><div class="work-num">03</div><div><div class="work-card-title">Communications Infrastructure</div><div class="work-card-body">Built a Slack-based communications system from scratch to keep the distributed team coordinated across time zones, regions, and organizational chaos — replacing the infrastructure lost in the merger.</div></div></div>
+      <div class="work-card"><div class="work-num">04</div><div><div class="work-card-title">White-Glove Participant Experience</div><div class="work-card-body">Maintained the white-glove participant experience Oath had promised its employees — ensuring that 15,000+ people across two regions had no awareness of the operational complexity happening behind the scenes.</div></div></div>
+    </div>
+  </div>
+  <div class="pull-quote">
+    <blockquote>"The goal wasn't to manage the crisis — it was to make sure <em>no one knew there was one.</em>"</blockquote>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">Impact</p>
+    <h2 class="section-title">What was <em>left behind</em></h2>
+    <div class="results-grid">
+      <div class="result-cell"><div class="result-big">15K+</div><div class="result-desc">Participants served</div></div>
+      <div class="result-cell"><div class="result-big">50+</div><div class="result-desc">Cities completed</div></div>
+      <div class="result-cell"><div class="result-big">0</div><div class="result-desc">Client-facing disruptions</div></div>
+      <div class="result-cell"><div class="result-big">✓</div><div class="result-desc">Tour completed on schedule</div></div>
+    </div>
+    <div style="text-align:center;"><a href="https://kelliblake.carrd.co/" class="btn-pill">← Back to Portfolio</a></div>
+  </div>
+</div>
+<footer>
+  <div class="footer-name">Kelli Blake</div>
+  <div class="footer-role">Creative Executive · Strategic Consultant</div>
+  <div class="footer-tag">Oath via First Agency · 2017</div>
+</footer>
+</body>
+</html>
