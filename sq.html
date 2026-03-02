@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM Queens — Kelli Blake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#2a2c35; --bg-card:#32343e; --white:#f0ede8; --muted:rgba(240,237,232,0.55); --divider:rgba(240,237,232,0.12); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--white); font-family:'Josefin Sans',sans-serif; font-weight:300; line-height:1.7; overflow-x:hidden; min-height:100vh; position:relative; }
+  body::before { content:''; position:fixed; top:0; left:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(160,104,122,0.25) 0%,rgba(160,104,122,0.08) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  body::after { content:''; position:fixed; top:0; right:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(106,154,154,0.2) 0%,rgba(106,154,154,0.06) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  .line-art { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .line-art svg { position:absolute; opacity:0.07; }
+  .line-art .left-lines { left:-40px; top:50%; transform:translateY(-50%); width:280px; }
+  .line-art .right-lines { right:-40px; top:50%; transform:translateY(-50%) scaleX(-1); width:280px; }
+  .content { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:0 40px; }
+  nav { position:relative; z-index:10; display:flex; justify-content:space-between; align-items:center; max-width:740px; margin:0 auto; padding:36px 40px; border-bottom:1px solid var(--divider); }
+  .nav-name { font-family:'Josefin Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--white); text-decoration:none; }
+  .nav-back { font-size:11px; font-weight:400; letter-spacing:3px; text-transform:uppercase; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color 0.3s; }
+  .nav-back:hover { color:var(--white); }
+  .hero { padding:72px 0 56px; text-align:center; border-bottom:1px solid var(--divider); }
+  .hero-eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); font-weight:400; margin-bottom:28px; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(42px,6vw,68px); font-weight:300; line-height:1.1; letter-spacing:-1px; margin-bottom:24px; color:var(--white); }
+  .hero-title em { font-style:italic; font-weight:300; }
+  .hero-subtitle { font-size:14px; font-weight:300; letter-spacing:1px; color:var(--muted); max-width:520px; margin:0 auto 40px; line-height:1.8; }
+  .hero-meta { display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+  .meta-item { display:flex; flex-direction:column; gap:6px; text-align:center; }
+  .meta-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); font-weight:400; }
+  .meta-value { font-size:13px; font-weight:400; letter-spacing:1px; color:var(--white); }
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--divider); }
+  .stat-cell { padding:36px 24px; text-align:center; border-right:1px solid var(--divider); }
+  .stat-cell:last-child { border-right:none; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:300; color:var(--white); line-height:1; margin-bottom:8px; letter-spacing:-1px; }
+  .stat-lbl { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); font-weight:400; line-height:1.5; }
+  .section { padding:64px 0; border-bottom:1px solid var(--divider); }
+  .section-eyebrow { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); font-weight:400; margin-bottom:16px; text-align:center; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,40px); font-weight:300; line-height:1.2; letter-spacing:-0.5px; margin-bottom:28px; color:var(--white); text-align:center; }
+  .section-title em { font-style:italic; }
+  .section-body { font-size:14px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px; margin:0 auto; text-align:center; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:48px; }
+  .two-col-cell { background:var(--bg-card); padding:40px 36px; }
+  .two-col-cell .cell-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .two-col-cell .cell-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; line-height:1.3; color:var(--white); margin-bottom:16px; }
+  .two-col-cell .cell-title em { font-style:italic; }
+  .two-col-cell p { font-size:13px; font-weight:300; color:var(--muted); line-height:1.85; letter-spacing:0.2px; }
+  .two-col-cell p+p { margin-top:12px; }
+  .work-cards { display:flex; flex-direction:column; gap:2px; margin-top:48px; }
+  .work-card { background:var(--bg-card); padding:40px 36px; display:grid; grid-template-columns:52px 1fr; gap:28px; align-items:start; transition:background 0.3s; }
+  .work-card:hover { background:rgba(255,255,255,0.04); }
+  .work-num { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:rgba(240,237,232,0.2); line-height:1; padding-top:2px; }
+  .work-card-title { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--white); font-weight:600; margin-bottom:12px; }
+  .work-card-body { font-size:13px; font-weight:300; color:var(--muted); line-height:1.85; letter-spacing:0.2px; }
+  .press-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:40px; }
+  .press-pill { padding:8px 20px; border:1px solid var(--divider); border-radius:100px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); font-weight:400; transition:all 0.3s; }
+  .press-pill:hover { border-color:rgba(240,237,232,0.3); color:var(--white); }
+  .pull-quote { padding:64px 0; text-align:center; border-bottom:1px solid var(--divider); }
+  .pull-quote blockquote { font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3.5vw,32px); font-weight:300; font-style:italic; color:var(--white); line-height:1.6; max-width:560px; margin:0 auto; }
+  .pull-quote blockquote em { font-style:normal; border-bottom:1px solid rgba(240,237,232,0.3); padding-bottom:1px; }
+  .results-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:48px; }
+  .result-cell { background:var(--bg-card); padding:36px 24px; text-align:center; }
+  .result-big { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; color:var(--white); line-height:1; margin-bottom:10px; letter-spacing:-1px; }
+  .result-desc { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); line-height:1.6; }
+  .btn-pill { display:inline-flex; align-items:center; gap:10px; padding:12px 28px; border:1px solid rgba(240,237,232,0.3); border-radius:100px; font-family:'Josefin Sans',sans-serif; font-size:10px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:var(--white); text-decoration:none; transition:all 0.3s; margin-top:40px; }
+  .btn-pill:hover { background:rgba(240,237,232,0.08); border-color:rgba(240,237,232,0.5); }
+  footer { padding:48px 0 64px; text-align:center; position:relative; z-index:1; }
+  .footer-name { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--white); margin-bottom:6px; }
+  .footer-role { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:28px; }
+  .footer-tag { font-size:11px; letter-spacing:2px; color:rgba(240,237,232,0.3); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .hero>* { animation:fadeUp 0.7s ease forwards; opacity:0; }
+  .hero>*:nth-child(1){animation-delay:0.1s} .hero>*:nth-child(2){animation-delay:0.22s} .hero>*:nth-child(3){animation-delay:0.34s} .hero>*:nth-child(4){animation-delay:0.46s}
+  @media(max-width:700px){ nav,.content{padding-left:24px;padding-right:24px} .stats-row{grid-template-columns:repeat(2,1fr)} .stat-cell:nth-child(2){border-right:none} .two-col{grid-template-columns:1fr} .results-grid{grid-template-columns:repeat(2,1fr)} .work-card{grid-template-columns:36px 1fr;gap:16px} }
+</style>
+</head>
+<body>
+<div class="line-art">
+  <svg class="left-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+  <svg class="right-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+</div>
+<nav><a href="#" class="nav-name">Kelli Blake</a><a href="https://kelliblake.carrd.co/" class="nav-back">← Back to Portfolio</a></nav>
+<div class="content">
+  <div class="hero">
+    <p class="hero-eyebrow">Case Study · March 2021 – November 2022</p>
+    <h1 class="hero-title">Turning a Web Series into<br><em>a National Movement</em></h1>
+    <p class="hero-subtitle">7 million media impressions in one month — then transforming a web series into a fully registered nonprofit with a mission built to last.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">STEM Queens</span></div>
+      <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">20 Months</span></div>
+      <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Publicist &amp; Strategic Consultant</span></div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-cell"><div class="stat-num">7M+</div><div class="stat-lbl">Impressions in month one</div></div>
+    <div class="stat-cell"><div class="stat-num">4</div><div class="stat-lbl">Weeks to national coverage</div></div>
+    <div class="stat-cell"><div class="stat-num">6+</div><div class="stat-lbl">National outlets</div></div>
+    <div class="stat-cell"><div class="stat-num">1</div><div class="stat-lbl">Nonprofit transformation</div></div>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">The Work</p>
+    <h2 class="section-title">The PR campaign proved the audience existed.<br><em>The nonprofit gave them somewhere to belong.</em></h2>
+    <div class="two-col">
+      <div class="two-col-cell">
+        <div class="cell-label">The Challenge</div>
+        <h3 class="cell-title">A show with a mission <em>bigger than itself</em></h3>
+        <p>STEM Queens was a web series celebrating Black women in STEM — but its founders had a vision that went well beyond content. The challenge was to generate enough media momentum to prove the audience existed, then use that proof to fuel a larger organizational transformation.</p>
+      </div>
+      <div class="two-col-cell">
+        <div class="cell-label">The Approach</div>
+        <h3 class="cell-title">Grassroots first. <em>Infrastructure second.</em></h3>
+        <p>A targeted grassroots PR campaign generated 7M+ impressions in the first month and secured placements in six national outlets within four weeks. That media proof became the foundation for the next phase: transforming STEM Queens from a web series into a fully registered nonprofit with a complete rebrand.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">Work Delivered</p>
+    <h2 class="section-title">From press campaign<br><em>to nonprofit transformation</em></h2>
+    <div class="work-cards">
+      <div class="work-card"><div class="work-num">01</div><div><div class="work-card-title">Grassroots PR Campaign</div><div class="work-card-body">Designed and executed a targeted grassroots media campaign that generated 7M+ impressions in the first month and secured placements in Chicago Tribune, Entertainment Weekly, E! Online, Cheddar, Heavy, and NewsOne within four weeks of launch.</div></div></div>
+      <div class="work-card"><div class="work-num">02</div><div><div class="work-card-title">Nonprofit Transformation Strategy</div><div class="work-card-body">Developed the strategic roadmap for transforming STEM Queens from a web series into a registered nonprofit — defining mission, organizational structure, and the positioning that would differentiate it in the broader STEM equity space.</div></div></div>
+      <div class="work-card"><div class="work-num">03</div><div><div class="work-card-title">Brand Identity &amp; Relaunch</div><div class="work-card-body">Led the complete rebrand of STEM Queens as a nonprofit organization — new identity, new messaging architecture, and a relaunch strategy designed to carry the momentum from the PR campaign into the organization's next chapter.</div></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">As Seen In</p>
+    <h2 class="section-title"><em>National coverage</em> in four weeks</h2>
+    <div class="press-bar">
+      <span class="press-pill">Chicago Tribune</span>
+      <span class="press-pill">Entertainment Weekly</span>
+      <span class="press-pill">E! Online</span>
+      <span class="press-pill">Cheddar</span>
+      <span class="press-pill">Heavy</span>
+      <span class="press-pill">NewsOne</span>
+    </div>
+  </div>
+  <div class="pull-quote">
+    <blockquote>"The mission was always bigger than the show. The PR campaign proved the audience existed — <em>the nonprofit gave them somewhere to belong.</em>"</blockquote>
+  </div>
+  <div class="section">
+    <p class="section-eyebrow">Impact</p>
+    <h2 class="section-title">What was <em>left behind</em></h2>
+    <div class="results-grid">
+      <div class="result-cell"><div class="result-big">7M+</div><div class="result-desc">Impressions month one</div></div>
+      <div class="result-cell"><div class="result-big">4</div><div class="result-desc">Weeks to national coverage</div></div>
+      <div class="result-cell"><div class="result-big">6+</div><div class="result-desc">National outlets secured</div></div>
+      <div class="result-cell"><div class="result-big">1</div><div class="result-desc">Nonprofit launched</div></div>
+    </div>
+    <div style="text-align:center;"><a href="https://kelliblake.carrd.co/" class="btn-pill">← Back to Portfolio</a></div>
+  </div>
+</div>
+<footer>
+  <div class="footer-name">Kelli Blake</div>
+  <div class="footer-role">Creative Executive · Strategic Consultant</div>
+  <div class="footer-tag">STEM Queens · 2021–2022</div>
+</footer>
+</body>
+</html>
