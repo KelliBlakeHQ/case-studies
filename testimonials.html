@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials - Kelli Blake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#2a2c35; --bg-card:#32343e; --white:#f0ede8; --muted:rgba(240,237,232,0.55); --divider:rgba(240,237,232,0.12); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--white); font-family:'Josefin Sans',sans-serif; font-weight:300; line-height:1.7; overflow-x:hidden; min-height:100vh; position:relative; }
+  body::before { content:''; position:fixed; top:0; left:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(160,104,122,0.25) 0%,rgba(160,104,122,0.08) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  body::after { content:''; position:fixed; top:0; right:0; bottom:0; width:220px; background:linear-gradient(180deg,rgba(106,154,154,0.2) 0%,rgba(106,154,154,0.06) 50%,transparent 100%); pointer-events:none; z-index:0; }
+  .line-art { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .line-art svg { position:absolute; opacity:0.07; }
+  .line-art .left-lines { left:-40px; top:50%; transform:translateY(-50%); width:280px; }
+  .line-art .right-lines { right:-40px; top:50%; transform:translateY(-50%) scaleX(-1); width:280px; }
+  .content { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:0 40px; }
+  nav { position:relative; z-index:10; display:flex; justify-content:space-between; align-items:center; max-width:740px; margin:0 auto; padding:36px 40px; border-bottom:1px solid var(--divider); }
+  .nav-name { font-family:'Josefin Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--white); text-decoration:none; }
+  .nav-back { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.3s; }
+  .nav-back:hover { color:var(--white); }
+  .hero { padding:72px 0 56px; text-align:center; border-bottom:1px solid var(--divider); }
+  .hero-eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); font-weight:400; margin-bottom:20px; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,6vw,64px); font-weight:300; line-height:1.1; letter-spacing:-1px; color:var(--white); margin-bottom:20px; }
+  .hero-title em { font-style:italic; }
+  .hero-sub { font-size:13px; color:var(--muted); letter-spacing:1px; line-height:1.8; max-width:480px; margin:0 auto; }
+  .testimonials { padding:64px 0; display:flex; flex-direction:column; gap:2px; }
+  .t-card { background:var(--bg-card); padding:48px 44px; transition:background 0.3s; }
+  .t-card:hover { background:rgba(255,255,255,0.04); }
+  .t-quote { font-family:'Cormorant Garamond',serif; font-size:clamp(17px,2.2vw,21px); font-style:italic; font-weight:300; color:var(--white); line-height:1.75; margin-bottom:28px; }
+  .t-attribution { display:flex; flex-direction:column; gap:5px; padding-top:20px; border-top:1px solid var(--divider); }
+  .t-name { font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--white); }
+  .t-title { font-size:11px; font-weight:300; letter-spacing:1px; color:var(--muted); line-height:1.5; }
+  footer { padding:48px 0 64px; text-align:center; position:relative; z-index:1; border-top:1px solid var(--divider); }
+  .footer-name { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--white); margin-bottom:6px; }
+  .footer-role { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .hero>* { animation:fadeUp 0.7s ease forwards; opacity:0; }
+  .hero>*:nth-child(1){animation-delay:0.1s} .hero>*:nth-child(2){animation-delay:0.22s} .hero>*:nth-child(3){animation-delay:0.34s}
+  @media(max-width:700px){ nav,.content{padding-left:24px;padding-right:24px} .t-card{padding:36px 28px} }
+</style>
+</head>
+<body>
+<div class="line-art">
+  <svg class="left-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+  <svg class="right-lines" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="white" stroke-width="0.8"><path d="M280,600 Q-80,400 100,200 Q280,0 80,-100"/><path d="M280,600 Q-60,380 120,180 Q300,0 100,-100"/><path d="M280,600 Q-40,360 140,160 Q320,0 120,-100"/><path d="M280,600 Q-20,340 160,140 Q340,-20 140,-100"/><path d="M280,600 Q0,320 180,120 Q360,-40 160,-100"/><path d="M280,600 Q20,300 200,100 Q380,-60 180,-100"/><path d="M280,600 Q40,280 220,80 Q400,-80 200,-100"/><path d="M280,600 Q60,260 240,60 Q420,-100 220,-100"/><path d="M280,600 Q80,240 260,40 Q440,-120 240,-100"/><path d="M280,600 Q100,220 280,20 Q460,-140 260,-100"/><path d="M280,600 Q120,200 300,0 Q480,-160 280,-100"/><path d="M280,600 Q140,180 320,-20 Q500,-180 300,-100"/></g></svg>
+</div>
+<nav>
+  <a href="#" class="nav-name">Kelli Blake</a>
+  <a href="https://kelliblake.carrd.co/" class="nav-back">Back to Portfolio</a>
+</nav>
+<div class="content">
+  <div class="hero">
+    <p class="hero-eyebrow">What People Say</p>
+    <h1 class="hero-title">In Their<br><em>Own Words</em></h1>
+    <p class="hero-sub">From founders and festival directors to colleagues and collaborators.</p>
+  </div>
+  <div class="testimonials">
+
+    <div class="t-card">
+      <p class="t-quote">I regularly engage Kelli to help me evaluate client feedback and convert it into paying offers. She has the uncanny ability to understand the unsaid and then clearly communicate the challenge and solution. Did I mention that I just love her energy? Hiring her will be your best decision of the year.</p>
+      <div class="t-attribution">
+        <span class="t-name">Jai Stone</span>
+        <span class="t-title">Digital Brand Strategist</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">While managing various stakeholders and responsibilities associated with putting together a live event of this scale, she managed to stay incredibly calm under considerable pressure. Kelli was very instrumental in making sure my team received all the digital assets needed. She was able to maneuver and work through every roadblock and obstacle that occurred with admirable grace and tact. Her commitment to excellence and quality is praiseworthy and second to none.</p>
+      <div class="t-attribution">
+        <span class="t-name">Danny Shaw</span>
+        <span class="t-title">Principal, 5 Line Designs LLC &mdash; ESSENCE Festival 2016</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">Rarely do you come across someone so trustworthy. We took her out of her comfort zone and had her work with our CFO on exhibitor invoice and billing. She was thorough and discreet. Onsite she managed the back office and exhibitor lounge addressing last minute VIP requests, fielding questions from visitors, exhibitors, artists and production staff all while manning a five-line switchboard in what was our highest selling show to date.</p>
+      <div class="t-attribution">
+        <span class="t-name">Alexis Hubshman</span>
+        <span class="t-title">Founder + Owner, SCOPE Art Shows</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">Thank you, Kelli, for going on the online festival adventure with SIO. Especially as I was stretched extra thin this year, it was reassuring to have you on board &mdash; not only because of the excellent customer service you provide to SIO members, but because of your natural inclination to support and guide the volunteer team from within. I so value your grounded energy and quiet leadership. You are a delight to work with.</p>
+      <div class="t-attribution">
+        <span class="t-name">Laura Henneman</span>
+        <span class="t-title">Manager of Industry Relations, Sundance Film Festival</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">Kelli Blake and I were employed at Black Public Media for several months in 2024. From the moment I met Kelli at her interview, it became clear that she was a consummate professional. It was evident right away that she was knowledgeable, attentive, prompt and detail-oriented. Kelli had a way of entering situations, quickly assessing the circumstances, and offering viable solutions. Her work and communication styles are refreshingly straight-forward, and you can trust that any information she gives you is thorough and accurate. I collaborated with Kelli on a quarterly newsletter — she transformed the more formal language I provided into language more fitting for a newsletter, and created a final document that was compelling and quite visually appealing. If I ever have an opportunity to work with Kelli again I would certainly take it, and I would highly recommend her as a partner or collaborator.</p>
+      <div class="t-attribution">
+        <span class="t-name">DeLynda Lindsey</span>
+        <span class="t-title">Grant Writer and Consultant &middot; Black Public Media</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">Kelli has been integral to the launch of my YouTube series STEM Queens &mdash; providing vendor referrals, guidance on business structure, organization, and execution. Her work was top-notch and she has a great work ethic and spirit. I look forward to working with her in the future.</p>
+      <div class="t-attribution">
+        <span class="t-name">J'Tia Hart</span>
+        <span class="t-title">Nuclear Engineer &amp; STEM Queens Founder</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">Kelli has an acute eye for aesthetics, the ability to communicate well on paper and verbally, and an exuberant and creative energy that is undeniable. Her innovation and creativity has led me to hire Kelli for various positions within the ABFF: event manager, sponsorship and client relations manager, as well as develop and oversee the gifting efforts for the ProHollywood Initiative, a project that pairs professional athletes with independent filmmakers.</p>
+      <div class="t-attribution">
+        <span class="t-name">Ghana Odet Wilson</span>
+        <span class="t-title">Entertainment Event Professional, American Black Film Festival</span>
+      </div>
+    </div>
+
+    <div class="t-card">
+      <p class="t-quote">I have worked with Kelli Blake three times. The first was when I hired her to help bring awareness to an international film I was working on in post-production called DOKA. Even though the film had not been selected, we needed a strategic presence at Sundance to amplify the title and what was happening in Ethiopia. Kelli reframed how we were thinking about festival strategy entirely, shifting our focus from selection to impact. She delivered exactly that. I brought her back twice after that for additional work on DOKA and my own personal project, because when you find someone who changes how you think about a problem and then solves it, you just don't let them go. Kelli is a strategic thinker and a back engineer. She doesn't bring fluff. She brings the thing itself. She looks at what you have, identifies what you actually need, and tells you clearly how to get there. Then she does it with a commitment to excellence that is rare. She's analytical, pragmatic, trustworthy, and loyal to every word she gives you. I would recommend her without hesitation to anyone working in the film space who needs someone who knows their craft and will change how you see the path forward.</p>
+      <div class="t-attribution">
+        <span class="t-name">Nnegest Likk&eacute;</span>
+        <span class="t-title">Filmmaker</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer>
+  <div class="footer-name">Kelli Blake</div>
+  <div class="footer-role">Creative Executive &middot; Strategic Consultant</div>
+</footer>
+</body>
+</html>
